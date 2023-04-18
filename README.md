@@ -15,8 +15,8 @@
 
 ### Association
 
-- has_many :sales_history
-- has_many :item
+- has_many :sales_histories
+- has_many :items
 
 
 ## items テーブル
@@ -44,18 +44,18 @@
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | post_code       | string     | null: false                    |
-| prefecture_id   | int        | null: false,                   |
-| city            | string     | null: false,                   |
-| street          | string     | null: false,                   |
+| prefecture_id   | int        | null: false                    |
+| city            | string     | null: false                    |
+| street          | string     | null: false                    |
 | building_name   | string     |                                |
-| phone_num       | string     | null: false,                   |
+| phone_num       | string     | null: false                    |
 | sales_history   | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :sales_history
 
-## sales_history テーブル
+## sales_histories テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
@@ -63,6 +63,6 @@
 | item             | references | null: false, foreign_key: true |
 
 ### Association
-- has_one    :addresses
+- has_one    :address
 - belongs_to :user
 - belongs_to :item
