@@ -15,8 +15,9 @@
 
 ### Association
 
+- has_many :sales_history
 - has_many :item
-- has_one  :address
+
 
 ## items テーブル
 
@@ -24,13 +25,13 @@
 | ------------------- | ---------- | ------------------------------ |
 | item_name           | string     | null: false                    |
 | explanation         | text       | null: false                    |
-| category_id         | int        | null: false  foreign_key: true |
-| item_condition_id   | int        | null: false, foreign_key: true |
-| shipping_price_id   | int        | null: false, foreign_key: true |
-| prefecture_id       | int        | null: false, foreign_key: true |
-| shipping_date_id    | string     | null: false, foreign_key: true |
-| price               | int        | null: false,                   |
-| user_id             | int        | null: false, foreign_key: true |
+| category_id         | int        | null: false                    |
+| item_condition_id   | int        | null: false                    |
+| shipping_price_id   | int        | null: false                    |
+| prefecture_id       | int        | null: false                    |
+| shipping_date_id    | string     | null: false                    |
+| price               | int        | null: false                    |
+| user                | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -38,29 +39,30 @@
 - has_one  :sales_history
 
 
-## addresses テーブル
+## addresses テーブル　発送先住所
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | post_code       | string     | null: false                    |
-| prefecture_id   | int        | null: false, foreign_key: true |
+| prefecture_id   | int        | null: false,                   |
 | city            | string     | null: false,                   |
 | street          | string     | null: false,                   |
 | building_name   | string     |                                |
-| phone_num       | int        | null: false,                   |
-| user_id         | int        | null: false, foreign_key: true |
+| phone_num       | string     | null: false,                   |
+| sales_history   | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :user
+- belongs_to :sales_history
 
 ## sales_history テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| user_id          | int        | null: false, foreign_key: true |
-| item_id          | int        | null: false, foreign_key: true |
+| user             | references | null: false, foreign_key: true |
+| item             | references | null: false, foreign_key: true |
 
 ### Association
+- has_one    :addresses
 - belongs_to :user
 - belongs_to :item
