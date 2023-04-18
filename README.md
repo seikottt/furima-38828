@@ -24,18 +24,18 @@
 | ------------------- | ---------- | ------------------------------ |
 | item_name           | string     | null: false                    |
 | explanation         | text       | null: false                    |
-| category_id         | references | null: false  foreign_key: true |
-| item_condition_id   | references | null: false, foreign_key: true |
-| shipping_price      | string     | null: false,                   |
-| shipping_area       | string     | null: false,                   |
-| shipping_date       | string     | null: false,                   |
+| category_id         | int        | null: false  foreign_key: true |
+| item_condition_id   | int        | null: false, foreign_key: true |
+| shipping_price_id   | int        | null: false, foreign_key: true |
+| prefecture_id       | int        | null: false, foreign_key: true |
+| shipping_date_id    | string     | null: false, foreign_key: true |
 | price               | int        | null: false,                   |
+| user_id             | int        | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one  :category
-- has_one  :item_condition
+- has_one  :sales_history
 
 
 ## addresses テーブル
@@ -43,35 +43,24 @@
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | post_code       | string     | null: false                    |
-| prefecture      | string     | null: false,                   |
+| prefecture_id   | int        | null: false, foreign_key: true |
 | city            | string     | null: false,                   |
 | street          | string     | null: false,                   |
 | building_name   | string     |                                |
 | phone_num       | int        | null: false,                   |
-| user_id         | references | null: false, foreign_key: true |
+| user_id         | int        | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 
-## categories テーブル
+## sales_history テーブル
 
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| category_name   | string     | null: false                    |
-| item_id         | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :item
-
-## item_conditions テーブル
-
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| condition       | string     | null: false                    |
-| item_id         | references | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| user_id          | int        | null: false, foreign_key: true |
+| item_id          | int        | null: false, foreign_key: true |
 
 ### Association
-
+- belongs_to :user
 - belongs_to :item
