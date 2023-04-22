@@ -9,5 +9,8 @@ FactoryBot.define do
     shipping_date_id { 2 }
     price { 1000 }
     association :user
+    after(:build) do |item|
+      item.image.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'sample.jpg')), filename: 'sample.jpg')
+    end
   end
 end
