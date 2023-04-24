@@ -7,7 +7,7 @@ RSpec.describe Item, type: :model do
 
   describe 'アイテム新規登録' do
     context '新規登録できる場合' do
-      it "item_name、explanation、item_condition_id、category_id、shipping_price_id、prefecture_id、shipping_date_id、price、image,userが存在すれば登録できる" do
+      it 'item_name、explanation、item_condition_id、category_id、shipping_price_id、prefecture_id、shipping_date_id、price、image,userが存在すれば登録できる' do
         expect(@item).to be_valid
       end
     end
@@ -57,25 +57,25 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
-      it"imageが空では保存できない" do
+      it 'imageが空では保存できない' do
         @item.image = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include()
+        expect(@item.errors.full_messages).to include
       end
-      it"userが紐付いていなければ保存できない" do
+      it 'userが紐付いていなければ保存できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include()
+        expect(@item.errors.full_messages).to include
       end
-      it"priceが299以下では保存できない" do
+      it 'priceが299以下では保存できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not included in the list")
+        expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
-      it"priceが10_000_000以上では保存できない" do
-        @item.price = 10000000
+      it 'priceが10_000_000以上では保存できない' do
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not included in the list")
+        expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
     end
   end
