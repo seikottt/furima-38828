@@ -19,23 +19,29 @@ RSpec.describe OrderAddress, type: :model do
     end
 
     context '内容に問題ある場合' do
+      it 'tokenが空では登録できないこと' do
+        @order_address.token = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Token can't be blank")
+      end
+
       it '郵便番号が必須であること' do
         @order_address.post_code = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Post code can't be blank")
       end
-        it '郵便番号は、「3桁ハイフン4桁」の半角文字列のみ保存可能なこと（良い例：123-4567　良くない例：1234567）' do
+      it '郵便番号は、「3桁ハイフン4桁」の半角文字列のみ保存可能なこと（良い例：123-4567　良くない例：1234567）' do
         @order_address.post_code = '1234567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
-  
+        expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
+
         @order_address.post_code = '12-34567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
-        
+        expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
+
         @order_address.post_code = '１２３−４５６７'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+        expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
       it 'prefecture_idが0では登録できない' do
         @order_address.prefecture_id = 0
