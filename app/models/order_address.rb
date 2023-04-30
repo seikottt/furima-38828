@@ -9,7 +9,7 @@ class OrderAddress
     validates :city
     validates :street
     validates :phone_num, format: { with: /\A\d{10,11}\z/ }
-    validates :token, presence: true
+    validates :token
   end
 
   validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
