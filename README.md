@@ -15,7 +15,7 @@
 
 ### Association
 
-- has_many :sales_histories
+- has_many :orders
 - has_many :items
 
 
@@ -36,7 +36,7 @@
 ### Association
 
 - belongs_to :user
-- has_one  :sales_history
+- has_one  :order
 
 
 ## addresses テーブル　発送先住所
@@ -49,13 +49,13 @@
 | street          | string     | null: false                    |
 | building_name   | string     |                                |
 | phone_num       | string     | null: false                    |
-| sales_history   | references | null: false, foreign_key: true |
+| order           | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :sales_history
+- belongs_to :order
 
-## sales_histories テーブル
+## orders テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
