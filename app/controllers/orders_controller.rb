@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:index, :create,:order_address_params]
+  before_action :set_item, only: [:index, :create]
 
 
   def index
@@ -13,7 +13,6 @@ class OrdersController < ApplicationController
 
   def create
     @order_address = OrderAddress.new(order_address_params)
-    @item.price
     if @order_address.valid?
       pay_item
       @order_address.save
