@@ -36,15 +36,17 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Post code can't be blank")
       end
-      it '郵便番号は、「3桁ハイフン4桁」の半角文字列のみ保存可能なこと（良い例：123-4567　良くない例：1234567）' do
+      it '郵便番号は、ハイフンが必要なこと' do
         @order_address.post_code = '1234567'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
-
+      end
+      it '郵便番号は、「3桁ハイフン4桁」のみ保存可能なこと' do
         @order_address.post_code = '12-34567'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
-
+      end
+      it '郵便番号は半角のみ保存可能であること' do
         @order_address.post_code = '１２３−４５６７'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
@@ -79,7 +81,7 @@ RSpec.describe OrderAddress, type: :model do
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include('Phone num is invalid')
       end
-      it '電話番号は12桁以下では保存できないこと' do
+      it '電話番号は12桁以上では保存できないこと' do
         @order_address.phone_num = '090123456789'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone num is invalid')
